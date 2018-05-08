@@ -1,0 +1,19 @@
+<main>
+    <div class="container body-container">
+        <div class="row">
+            <div id="main" class="col-sm-9">
+                <div>
+                    <span th:text="${user.email}"></span>
+                    <br/>
+                    <span th:text="${user.fullName}"></span>
+                </div>
+
+
+
+                <div class="cbp-pgitem-flip">
+                    <img  th:src="@{'data:image/jpeg;base64,'+${picture}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
