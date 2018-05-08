@@ -22,12 +22,12 @@ public class CategoryServicesImpl implements CategoryServices{
     }
 
     @Override
-    public boolean doesCategoryExists(Integer id) {
+    public boolean doesCategoryExists(final Integer id) {
         return this.categoryRepository.exists(id);
     }
 
     @Override
-    public Category getCategory(Integer id) {
+    public Category getCategory(final Integer id) {
         return this.categoryRepository.getOne(id);
     }
 }
