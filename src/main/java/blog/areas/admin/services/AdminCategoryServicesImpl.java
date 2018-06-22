@@ -31,7 +31,6 @@ public class AdminCategoryServicesImpl implements AdminCategoryServices{
     }
 
     /**
-     * author
      * Sorts by id
      * @param categories -
      * @return -
