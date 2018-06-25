@@ -1,6 +1,5 @@
 package blog.areas.admin.controller;
 
-
 import blog.areas.admin.services.AdminCategoryServices;
 import blog.areas.category.bindingModel.CategoryBindingModel;
 import blog.areas.category.entity.Category;
