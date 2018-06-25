@@ -67,8 +67,6 @@ public class UserController {
     public String profilePage(Model model){
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        //User user = this.userService.getUser(principal.getUsername());
-
         UserViewModel user = this.userService.getUserView(principal.getUsername());
 
         model.addAttribute("picture", Base64.getEncoder().encodeToString(user.getPicture()));
