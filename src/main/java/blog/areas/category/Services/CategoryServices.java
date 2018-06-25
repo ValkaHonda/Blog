@@ -1,6 +1,6 @@
 package blog.areas.category.Services;
 
-import blog.areas.category.entity.Category;
+import blog.areas.category.entities.Category;
 
 import java.util.List;
 

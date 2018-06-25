@@ -1,5 +1,6 @@
-package blog.areas.user.bindingModel;
+package blog.areas.user.bindingModels;
 
+import blog.areas.user.bindingModels.UserBindingModel;
 import java.util.ArrayList;
 import java.util.List;
 

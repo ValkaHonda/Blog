@@ -2,7 +2,7 @@ package blog.areas.admin.controllers;
 
 import blog.areas.admin.services.AdminCategoryServices;
 import blog.areas.category.bindingModel.CategoryBindingModel;
-import blog.areas.category.entity.Category;
+import blog.areas.category.entities.Category;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;

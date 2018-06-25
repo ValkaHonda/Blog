@@ -3,7 +3,7 @@ package blog.areas.admin.services;
 import blog.areas.article.entities.Article;
 import blog.areas.article.repository.ArticleRepository;
 import blog.areas.category.bindingModel.CategoryBindingModel;
-import blog.areas.category.entity.Category;
+import blog.areas.category.entities.Category;
 import blog.areas.category.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

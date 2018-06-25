@@ -2,7 +2,7 @@ package blog.areas.user.services;
 
 import blog.areas.role.entity.Role;
 import blog.areas.role.repository.RoleRepository;
-import blog.areas.user.bindingModel.UserBindingModel;
+import blog.areas.user.bindingModels.UserBindingModel;
 import blog.areas.user.entity.User;
 import blog.areas.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

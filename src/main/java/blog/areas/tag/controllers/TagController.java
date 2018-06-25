@@ -1,6 +1,6 @@
 package blog.areas.tag.controller;
 
-import blog.areas.tag.entity.Tag;
+import blog.areas.tag.entities.Tag;
 import blog.areas.tag.services.TagServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

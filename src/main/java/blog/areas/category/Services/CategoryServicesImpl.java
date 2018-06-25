@@ -1,6 +1,6 @@
 package blog.areas.category.Services;
 
-import blog.areas.category.entity.Category;
+import blog.areas.category.entities.Category;
 import blog.areas.category.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

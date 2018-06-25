@@ -2,7 +2,7 @@ package blog.areas.home.controllers;
 
 import blog.areas.article.entities.Article;
 import blog.areas.category.Services.CategoryServices;
-import blog.areas.category.entity.Category;
+import blog.areas.category.entities.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

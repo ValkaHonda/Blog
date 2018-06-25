@@ -1,6 +1,6 @@
 package blog.areas.user.controller;
 
-import blog.areas.user.bindingModel.UserBindingModel;
+import blog.areas.user.bindingModels.UserBindingModel;
 import blog.areas.user.entity.User;
 import blog.areas.user.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;

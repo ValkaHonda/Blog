@@ -4,7 +4,7 @@ import blog.areas.article.entities.Article;
 import blog.areas.article.repository.ArticleRepository;
 import blog.areas.role.entity.Role;
 import blog.areas.role.repository.RoleRepository;
-import blog.areas.user.bindingModel.UserEditBindingModel;
+import blog.areas.user.bindingModels.UserEditBindingModel;
 import blog.areas.user.entity.User;
 import blog.areas.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +53,7 @@ public class AdminUserServicesImpl implements AdminUserServices {
     @Override
     public void editUser(final Integer userId, UserEditBindingModel userEditBindingModel) {
         User user = this.userRepository.findOne(userId);
+
 
         if (!StringUtils.isEmpty(userEditBindingModel.getPassword())
                 && !StringUtils.isEmpty(userEditBindingModel.getConfirmPassword())){

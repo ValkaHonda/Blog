@@ -2,7 +2,7 @@ package blog.areas.admin.services;
 
 import blog.areas.article.entities.Article;
 import blog.areas.category.bindingModel.CategoryBindingModel;
-import blog.areas.category.entity.Category;
+import blog.areas.category.entities.Category;
 
 import java.util.List;
 import java.util.Set;

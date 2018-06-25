@@ -1,7 +1,7 @@
 package blog.areas.admin.services;
 
 import blog.areas.role.entity.Role;
-import blog.areas.user.bindingModel.UserEditBindingModel;
+import blog.areas.user.bindingModels.UserEditBindingModel;
 import blog.areas.user.entity.User;
 
 import java.util.List;

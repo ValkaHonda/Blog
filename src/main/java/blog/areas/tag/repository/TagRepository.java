@@ -1,6 +1,6 @@
 package blog.areas.tag.repository;
 
-import blog.areas.tag.entity.Tag;
+import blog.areas.tag.entities.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TagRepository extends JpaRepository<Tag,Integer> {

@@ -2,7 +2,7 @@ package blog.areas.admin.controllers;
 
 import blog.areas.admin.services.AdminUserServices;
 import blog.areas.role.entity.Role;
-import blog.areas.user.bindingModel.UserEditBindingModel;
+import blog.areas.user.bindingModels.UserEditBindingModel;
 import blog.areas.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

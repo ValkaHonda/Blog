@@ -1,7 +1,7 @@
 package blog.areas.article.entities;
 
-import blog.areas.category.entity.Category;
-import blog.areas.tag.entity.Tag;
+import blog.areas.category.entities.Category;
+import blog.areas.tag.entities.Tag;
 import blog.areas.user.entity.User;
 
 import javax.persistence.*;

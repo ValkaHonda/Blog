@@ -1,4 +1,4 @@
-package blog.areas.user.bindingModel;
+package blog.areas.user.bindingModels;
 
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,5 +1,4 @@
-package blog.areas.category.entity;
-
+package blog.areas.tag.entities;
 
 import blog.areas.article.entities.Article;
 
@@ -8,18 +7,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name = "tags")
+public class Tag {
     private Integer id;
     private String name;
     private Set<Article> articles;
 
-    public Category(){ }
-
-    public Category(String name){
+    public Tag(String name) {
         this.name = name;
         this.articles = new HashSet<>();
     }
+
+    public Tag() { }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +30,7 @@ public class Category {
         this.id = id;
     }
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true, nullable = false)
     public String getName() {
         return name;
     }
@@ -40,7 +39,7 @@ public class Category {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "category")
+    @ManyToMany(mappedBy = "tags")
     public Set<Article> getArticles() {
         return articles;
     }

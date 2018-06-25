@@ -1,6 +1,6 @@
 package blog.areas.user.services;
 
-import blog.areas.user.bindingModel.UserBindingModel;
+import blog.areas.user.bindingModels.UserBindingModel;
 import blog.areas.user.entity.User;
 
 import java.io.IOException;
