@@ -1,6 +1,6 @@
 package blog.areas.admin.services;
 
-import blog.areas.article.entity.Article;
+import blog.areas.article.entities.Article;
 import blog.areas.article.repository.ArticleRepository;
 import blog.areas.category.bindingModel.CategoryBindingModel;
 import blog.areas.category.entity.Category;

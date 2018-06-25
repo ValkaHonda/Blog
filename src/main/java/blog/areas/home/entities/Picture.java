@@ -1,11 +1,8 @@
-package blog.areas.home.entity;
+package blog.areas.home.entities;
 
-import blog.areas.article.entity.Article;
-import blog.areas.role.entity.Role;
 import blog.areas.user.entity.User;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "pictures")

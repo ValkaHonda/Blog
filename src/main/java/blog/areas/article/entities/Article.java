@@ -1,4 +1,4 @@
-package blog.areas.article.entity;
+package blog.areas.article.entities;
 
 import blog.areas.category.entity.Category;
 import blog.areas.tag.entity.Tag;

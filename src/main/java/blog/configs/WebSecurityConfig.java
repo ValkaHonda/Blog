@@ -1,4 +1,4 @@
-package blog.config;
+package blog.configs;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

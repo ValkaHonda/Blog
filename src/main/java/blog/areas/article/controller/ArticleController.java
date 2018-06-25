@@ -2,8 +2,8 @@ package blog.areas.article.controller;
 
 
 import blog.areas.admin.services.AdminCategoryServices;
-import blog.areas.article.bindingModel.ArticleBindingModel;
-import blog.areas.article.entity.Article;
+import blog.areas.article.bindingModels.ArticleBindingModel;
+import blog.areas.article.entities.Article;
 import blog.areas.article.services.ArticleService;
 import blog.areas.category.entity.Category;
 import blog.areas.user.entity.User;

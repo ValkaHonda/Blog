@@ -1,4 +1,4 @@
-package blog.config;
+package blog.configs;
 
 import blog.areas.user.entity.User;
 import org.springframework.security.core.GrantedAuthority;

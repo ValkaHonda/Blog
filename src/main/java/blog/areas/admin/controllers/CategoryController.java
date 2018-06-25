@@ -1,4 +1,4 @@
-package blog.areas.admin.controller;
+package blog.areas.admin.controllers;
 
 import blog.areas.admin.services.AdminCategoryServices;
 import blog.areas.category.bindingModel.CategoryBindingModel;

@@ -1,7 +1,7 @@
 package blog.areas.article.services;
 
-import blog.areas.article.bindingModel.ArticleBindingModel;
-import blog.areas.article.entity.Article;
+import blog.areas.article.bindingModels.ArticleBindingModel;
+import blog.areas.article.entities.Article;
 import blog.areas.article.repository.ArticleRepository;
 import blog.areas.category.entity.Category;
 import blog.areas.category.repository.CategoryRepository;
@@ -51,6 +51,8 @@ public class ArticleServiceImpl implements ArticleService {
                 category,
                 tags
         );
+
+
         this.articleRepository.saveAndFlush(articleEntity);
     }
 

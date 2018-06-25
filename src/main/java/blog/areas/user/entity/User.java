@@ -1,6 +1,6 @@
 package blog.areas.user.entity;
 
-import blog.areas.article.entity.Article;
+import blog.areas.article.entities.Article;
 import blog.areas.role.entity.Role;
 
 import javax.persistence.*;

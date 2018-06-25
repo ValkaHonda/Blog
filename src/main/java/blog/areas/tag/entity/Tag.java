@@ -1,6 +1,6 @@
 package blog.areas.tag.entity;
 
-import blog.areas.article.entity.Article;
+import blog.areas.article.entities.Article;
 
 import javax.persistence.*;
 import java.util.HashSet;

@@ -1,7 +1,7 @@
 package blog.areas.article.services;
 
-import blog.areas.article.bindingModel.ArticleBindingModel;
-import blog.areas.article.entity.Article;
+import blog.areas.article.bindingModels.ArticleBindingModel;
+import blog.areas.article.entities.Article;
 import org.springframework.web.bind.annotation.PathVariable;
 
 public interface ArticleService {

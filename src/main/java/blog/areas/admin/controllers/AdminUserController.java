@@ -1,4 +1,4 @@
-package blog.areas.admin.controller;
+package blog.areas.admin.controllers;
 
 import blog.areas.admin.services.AdminUserServices;
 import blog.areas.role.entity.Role;

@@ -1,4 +1,4 @@
-package blog.areas.article.bindingModel;
+package blog.areas.article.bindingModels;
 
 
 import javax.validation.constraints.NotNull;

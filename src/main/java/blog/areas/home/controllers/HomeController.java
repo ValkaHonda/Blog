@@ -1,6 +1,6 @@
-package blog.areas.home.controller;
+package blog.areas.home.controllers;
 
-import blog.areas.article.entity.Article;
+import blog.areas.article.entities.Article;
 import blog.areas.category.Services.CategoryServices;
 import blog.areas.category.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
