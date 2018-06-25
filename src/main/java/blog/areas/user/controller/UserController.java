@@ -3,6 +3,7 @@ package blog.areas.user.controller;
 import blog.areas.user.bindingModels.UserBindingModel;
 import blog.areas.user.entity.User;
 import blog.areas.user.services.UserServices;
+import blog.areas.user.viewModel.UserViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -66,7 +67,9 @@ public class UserController {
     public String profilePage(Model model){
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        User user = this.userService.getUser(principal.getUsername());
+        //User user = this.userService.getUser(principal.getUsername());
+
+        UserViewModel user = this.userService.getUserView(principal.getUsername());
 
         model.addAttribute("picture", Base64.getEncoder().encodeToString(user.getPicture()));
         model.addAttribute("user",user);

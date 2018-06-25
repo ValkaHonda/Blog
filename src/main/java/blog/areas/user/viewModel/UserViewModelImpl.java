@@ -3,13 +3,13 @@ package blog.areas.user.viewModel;
 public class UserViewModelImpl implements UserViewModel{
     private Integer id;
     private String email;
-    private String name;
+    private String fullName;
     private byte[] picture;
 
     public UserViewModelImpl(Integer id, String email, String name, byte[] picture) {
         this.id = id;
         this.email = email;
-        this.name = name;
+        this.fullName = name;
         this.picture = picture;
     }
 
@@ -24,8 +24,8 @@ public class UserViewModelImpl implements UserViewModel{
     }
 
     @Override
-    public String getName() {
-        return this.name;
+    public String getFullName() {
+        return this.fullName;
     }
 
     @Override

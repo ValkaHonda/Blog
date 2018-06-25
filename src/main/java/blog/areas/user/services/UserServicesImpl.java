@@ -5,6 +5,8 @@ import blog.areas.role.repository.RoleRepository;
 import blog.areas.user.bindingModels.UserBindingModel;
 import blog.areas.user.entity.User;
 import blog.areas.user.repository.UserRepository;
+import blog.areas.user.viewModel.UserViewModel;
+import blog.areas.user.viewModel.UserViewModelImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,13 @@ public class UserServicesImpl implements UserServices {
         , final RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+    }
+
+    @Override
+    public UserViewModel getUserView(String email) {
+        User user = this.getUser(email);
+        UserViewModel userViewModel = new UserViewModelImpl(user.getId(),user.getEmail(),user.getFullName(),user.getPicture());
+        return userViewModel;
     }
 
     @Override
