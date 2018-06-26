@@ -37,10 +37,12 @@ public class UserController {
         return "base-layout";
     }
 
-    @PostMapping("/register")
-    public String registerProcess(final UserBindingModel userBindingModel) throws IOException {
+    @PostMapping("/register") // working here
+    public String registerProcess(final UserBindingModel userBindingModel, Model model) throws IOException {
         if (!this.userService.doesPasswordsMatches(userBindingModel)){
-            return "redirect:/register";
+            model.addAttribute("view", "user/register");
+            model.addAttribute("inconsistentPasswords",true);
+            return "base-layout";
         }
         this.userService.registerUser(userBindingModel);
         return "redirect:/login";
