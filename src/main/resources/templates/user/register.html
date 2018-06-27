@@ -7,27 +7,27 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="user_email">Email</label>
                         <div class="col-sm-4 ">
-                            <input class="form-control" type="email" id="user_email" placeholder="Email" name="email" required="required"/>
+                            <input class="form-control" type="email" id="user_email" th:placeholder="${email}" name="email" required="required"/>
                         </div>
                         <label th:if="${invalidEmail} == true" class="col-sm-4 label label-warning label-warning-possition">Invalid Email</label>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="user_fullname">Full Name</label>
                         <div class="col-sm-4 ">
-                            <input class="form-control" type="text" id="user_fullname" placeholder="Full Name" name="fullName" required="required"/>
+                            <input class="form-control" type="text" id="user_fullname" th:placeholder="${fullName}" name="fullName" required="required"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="user_password_first">Password</label>
                         <div class="col-sm-4">
-                            <input type="password" class="form-control" id="user_password_first" placeholder="Password" name="password" required="required"/>
+                            <input type="password" class="form-control" id="user_password_first" th:placeholder="${pass}" name="password" required="required"/>
                         </div>
                         <label th:if="${inconsistentPasswords} == true" class="col-sm-4 label label-warning label-warning-possition" for="user_password_first">The two pass must match</label>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="user_password_second">Confirm Password</label>
                         <div class="col-sm-4">
-                            <input type="password" class="form-control" id="user_password_second" placeholder="Password" name="confirmPassword" required="required"/>
+                            <input type="password" class="form-control" id="user_password_second" th:placeholder="${pass}" name="confirmPassword" required="required"/>
                         </div>
                         <label th:if="${inconsistentPasswords} == true" class="col-sm-4 label label-warning label-warning-possition" for="user_password_first">The two pass must match</label>
                     </div>

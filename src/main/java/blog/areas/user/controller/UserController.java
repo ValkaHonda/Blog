@@ -33,6 +33,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String register(Model model){
+        this.userService.placeHoldersData(model);
         model.addAttribute("view", "user/register");
         return "base-layout";
     }

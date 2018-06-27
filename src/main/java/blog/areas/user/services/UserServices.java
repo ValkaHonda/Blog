@@ -14,4 +14,5 @@ public interface UserServices {
     boolean doesPasswordsMatches(final UserBindingModel userBindingModel);
     void registerUser(final UserBindingModel userBindingModel) throws IOException;
     boolean validateFormInput(final UserBindingModel userBindingModel, Model model);
+    void placeHoldersData(Model model);
 }

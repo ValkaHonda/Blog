@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.io.IOException;
-
+import  java.util.Hashtable;
+import  javax.naming.*;
+import  javax.naming.directory.*;
 
 @Service
 public class UserServicesImpl implements UserServices {
@@ -30,8 +32,7 @@ public class UserServicesImpl implements UserServices {
     @Override
     public UserViewModel getUserView(String email) {
         User user = this.getUser(email);
-        UserViewModel userViewModel = new UserViewModelImpl(user.getId(),user.getEmail(),user.getFullName(),user.getPicture());
-        return userViewModel;
+        return new UserViewModelImpl(user.getId(),user.getEmail(),user.getFullName(),user.getPicture());
     }
 
     @Override
@@ -68,18 +69,50 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public boolean validateFormInput(UserBindingModel userBindingModel, Model model) {
+        boolean isValid = true;
+        model.addAttribute("email",userBindingModel.getEmail());
         if (!this.doesPasswordsMatches(userBindingModel)){
             model.addAttribute("inconsistentPasswords",true);
-            return false;
+            isValid = false;
         }
-        if (!this.isValidEmail(userBindingModel.getEmail())){
+        if (!UserServicesImpl.isValidEmail(userBindingModel.getEmail())){
             model.addAttribute("invalidEmail",true);
-            return false;
+            isValid = false;
         }
-        return true;
+        placeHoldersData(model,userBindingModel.getEmail()
+                ,userBindingModel.getFullName(),"Password");
+        return isValid;
     }
 
-    private boolean isValidEmail(String email) {
+    @Override
+    public void placeHoldersData(Model model) {
+        model.addAttribute("email","Email");
+        model.addAttribute("fullName","Full Name");
+        model.addAttribute("pass","Password");
+    }
+    public void placeHoldersData(Model model, String email, String fullName, String pass) {
+        model.addAttribute("email",email);
+        model.addAttribute("fullName",fullName);
+        model.addAttribute("pass",pass);
+    }
+
+    private static boolean isValidEmail(String email) {
+        try {
+            if (UserServicesImpl.doLookup(email) > 0) {
+                return true;
+            }
+        }catch (NamingException e){
+            return false;
+        }
         return false;
+    }
+    private static int doLookup( String hostName ) throws NamingException {
+        Hashtable env = new Hashtable();
+        env.put("java.naming.factory.initial", "com.sun.jndi.dns.DnsContextFactory");
+        DirContext ictx = new InitialDirContext( env );
+        Attributes attrs = ictx.getAttributes( hostName, new String[] { "MX" });
+        Attribute attr = attrs.get( "MX" );
+        if( attr == null ) return( 0 );
+        return( attr.size() );
     }
 }
