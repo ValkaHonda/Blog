@@ -7,6 +7,7 @@ import blog.areas.user.entity.User;
 import blog.areas.user.repository.UserRepository;
 import blog.areas.user.viewModel.UserViewModel;
 import blog.areas.user.viewModel.UserViewModelImpl;
+import blog.services.EmailMessage;
 import blog.services.MailServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,9 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.io.IOException;
-import  java.util.Hashtable;
-import  javax.naming.*;
-import  javax.naming.directory.*;
 
 @Service
 public class UserServicesImpl implements UserServices {
@@ -57,6 +55,8 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public void registerUser(UserBindingModel userBindingModel) throws IOException {
+        String message = UserServicesImpl.newUserWelcomeText(userBindingModel.getFullName(), userBindingModel.getPassword());
+        this.mailServices.sendEmailMessage(new EmailMessage(userBindingModel.getEmail(),"Yo, welcome",message));
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         User user = new User(
                 userBindingModel.getEmail(),
@@ -78,8 +78,8 @@ public class UserServicesImpl implements UserServices {
             model.addAttribute("inconsistentPasswords",true);
             isValid = false;
         }
-        if (!UserServicesImpl.isValidEmail(userBindingModel.getEmail())){
-            model.addAttribute("invalidEmail",true);
+        if (!this.isEmailAddressFree(userBindingModel.getEmail())){
+            model.addAttribute("takenEmail",true);
             isValid = false;
         }
         placeHoldersData(model,userBindingModel.getEmail()
@@ -99,24 +99,19 @@ public class UserServicesImpl implements UserServices {
         model.addAttribute("fullName",fullName);
         model.addAttribute("pass",pass);
     }
-
-    private static boolean isValidEmail(String email) {
-        try {
-            if (UserServicesImpl.doLookup(email) > 0) {
-                return true;
-            }
-        }catch (NamingException e){
-            return false;
-        }
-        return false;
+    private static String newUserWelcomeText(String user, String pass){
+        return new StringBuilder("Wellcome, mr ")
+                .append(user)
+                .append("!")
+                .append(System.lineSeparator())
+                .append("You password is: ")
+                .append(pass)
+                .append(System.lineSeparator())
+                .append("Thank you for choosing us!").toString();
     }
-    private static int doLookup( String hostName ) throws NamingException {
-        Hashtable env = new Hashtable();
-        env.put("java.naming.factory.initial", "com.sun.jndi.dns.DnsContextFactory");
-        DirContext ictx = new InitialDirContext( env );
-        Attributes attrs = ictx.getAttributes( hostName, new String[] { "MX" });
-        Attribute attr = attrs.get( "MX" );
-        if( attr == null ) return( 0 );
-        return( attr.size() );
+    private boolean isEmailAddressFree(String email){
+        User user = this.userRepository.findByEmail(email);
+        System.out.println("Email exits : " + (user == null));
+        return user == null;
     }
 }

@@ -9,7 +9,7 @@
                         <div class="col-sm-4 ">
                             <input class="form-control" type="email" id="user_email" th:placeholder="${email}" name="email" required="required"/>
                         </div>
-                        <label th:if="${invalidEmail} == true" class="col-sm-4 label label-warning label-warning-possition">Invalid Email</label>
+                        <label th:if="${takenEmail} == true" class="col-sm-4 label label-warning label-warning-possition">The email is taken</label>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="user_fullname">Full Name</label>

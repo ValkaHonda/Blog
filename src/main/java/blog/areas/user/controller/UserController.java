@@ -40,7 +40,9 @@ public class UserController {
 
     @PostMapping("/register") // working here
     public String registerProcess(final UserBindingModel userBindingModel, Model model) throws IOException {
-        if (!this.userService.validateFormInput(userBindingModel,model)){
+        boolean isOk = this.userService.validateFormInput(userBindingModel,model);
+        System.out.println("isOk == " + isOk);
+        if (!isOk){
             model.addAttribute("view", "user/register");
             return "base-layout";
         }
