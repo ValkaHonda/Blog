@@ -10,6 +10,7 @@ import blog.areas.user.viewModel.UserViewModelImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.io.IOException;
 
@@ -63,5 +64,22 @@ public class UserServicesImpl implements UserServices {
         user.addRole(userRole);
         user.setPicture(picture);
         this.userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public boolean validateFormInput(UserBindingModel userBindingModel, Model model) {
+        if (!this.doesPasswordsMatches(userBindingModel)){
+            model.addAttribute("inconsistentPasswords",true);
+            return false;
+        }
+        if (!this.isValidEmail(userBindingModel.getEmail())){
+            model.addAttribute("invalidEmail",true);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidEmail(String email) {
+        return false;
     }
 }
