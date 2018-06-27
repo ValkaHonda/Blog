@@ -7,6 +7,7 @@ import blog.areas.user.entity.User;
 import blog.areas.user.repository.UserRepository;
 import blog.areas.user.viewModel.UserViewModel;
 import blog.areas.user.viewModel.UserViewModelImpl;
+import blog.services.MailServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,14 @@ import  javax.naming.directory.*;
 public class UserServicesImpl implements UserServices {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+    private MailServices mailServices;
 
     @Autowired
     public UserServicesImpl(final UserRepository userRepository
-        , final RoleRepository roleRepository) {
+        , final RoleRepository roleRepository, MailServices mailServices) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.mailServices = mailServices;
     }
 
     @Override
@@ -90,6 +93,7 @@ public class UserServicesImpl implements UserServices {
         model.addAttribute("fullName","Full Name");
         model.addAttribute("pass","Password");
     }
+
     public void placeHoldersData(Model model, String email, String fullName, String pass) {
         model.addAttribute("email",email);
         model.addAttribute("fullName",fullName);
