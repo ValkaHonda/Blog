@@ -9,6 +9,7 @@ import blog.areas.user.viewModel.UserViewModel;
 import blog.areas.user.viewModel.UserViewModelImpl;
 import blog.services.EmailMessage;
 import blog.services.MailServices;
+import blog.services.password.PasswordServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,13 +22,16 @@ public class UserServicesImpl implements UserServices {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private MailServices mailServices;
+    private PasswordServices passwordServices;
 
     @Autowired
     public UserServicesImpl(final UserRepository userRepository
-        , final RoleRepository roleRepository, MailServices mailServices) {
+        , final RoleRepository roleRepository, MailServices mailServices
+            , final PasswordServices passwordServices) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.mailServices = mailServices;
+        this.passwordServices = passwordServices;
     }
 
     @Override
@@ -55,8 +59,7 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public void registerUser(UserBindingModel userBindingModel) throws IOException {
-        //Here it will be the generated password
-        String message = UserServicesImpl.newUserWelcomeText(userBindingModel.getFullName(), userBindingModel.getPassword());
+        String message = UserServicesImpl.newUserWelcomeText(userBindingModel.getFullName(), this.passwordServices.generatePassword());
         this.mailServices.sendEmailMessage(new EmailMessage(userBindingModel.getEmail(),"Yo, welcome",message));
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         User user = new User(

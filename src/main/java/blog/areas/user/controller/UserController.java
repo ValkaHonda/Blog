@@ -4,6 +4,7 @@ import blog.areas.user.bindingModels.UserBindingModel;
 import blog.areas.user.entity.User;
 import blog.areas.user.services.UserServices;
 import blog.areas.user.viewModel.UserViewModel;
+import blog.services.password.PasswordServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -40,9 +41,7 @@ public class UserController {
 
     @PostMapping("/register") // working here
     public String registerProcess(final UserBindingModel userBindingModel, Model model) throws IOException {
-        boolean isOk = this.userService.validateFormInput(userBindingModel,model);
-        System.out.println("isOk == " + isOk);
-        if (!isOk){
+        if (!this.userService.validateFormInput(userBindingModel,model)){
             model.addAttribute("view", "user/register");
             return "base-layout";
         }

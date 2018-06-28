@@ -86,16 +86,6 @@ public class PasswordGeneratorImpl implements PasswordGenerator{
             this.usePunctuation = usePunctuation;
             return this;
         }
-
-//        /**
-//         * Get an object to use.
-//         *
-//         * @return the {@link gr.idrymavmela.business.lib.PasswordGenerator}
-//         * object.
-//         */
-//        public PasswordGeneratorImpl build() {
-//            return new PasswordGenerator(this);
-//        }
     }
 
     /**
