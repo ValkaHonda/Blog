@@ -19,4 +19,5 @@ public interface UserServices {
     boolean validateFormInput(final UserBindingModel userBindingModel, Model model);
     void placeHoldersData(Model model);
     boolean isValidChangePassword(Model model, ChangePassBindingModel changePassBindingModel, User user);
+    void updateUserPass(User user, String newPass);
 }

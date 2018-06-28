@@ -45,18 +45,12 @@ public class UserController {
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
         User user = this.userService.getUser(principal.getUsername());
-        if (changePassBindingModel == null){
-            for (int i = 0; i < 20; i++) {
-                System.out.println("null");
-            }
-        }
-        System.out.println("--->" + user.getPassword() + " :::: ");
         if(!this.userService.isValidChangePassword(model,changePassBindingModel,user)){ // the service call!
             model.addAttribute("view","user/changePassword");
             return "base-layout";
         }
-        System.out.println("OKKKKKKKKK Now --->" + user.getPassword() + " :::: ");
-        return "redirect:/login";
+        this.userService.updateUserPass(user, changePassBindingModel.getNewPass());
+        return "redirect:/logout";
     }
 
     @GetMapping("/register")

@@ -104,19 +104,27 @@ public class UserServicesImpl implements UserServices {
         boolean isValid = true;
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String pass = changePassBindingModel.getCurrentPass();
-        //bCryptPasswordEncoder.encode(pass);
-        if (!user.getPassword().equals("currentPass")){
+
+        if (!bCryptPasswordEncoder.matches(pass,user.getPassword())){
             model.addAttribute("wrongPassword",true);
             isValid = false;
         }
-//        if (!changePassBindingModel.getNewPass().equals(changePassBindingModel.getConfirmPass())){
-//            model.addAttribute("inconsistentPasswords",true);
-//            isValid = false;
-//        }
+        if (!changePassBindingModel.getNewPass().equals(changePassBindingModel.getConfirmPass())){
+            model.addAttribute("inconsistentPasswords",true);
+            isValid = false;
+        }
         return isValid;
     }
 
-    public void placeHoldersData(Model model, String email, String fullName, String pass) {
+    @Override
+    public void updateUserPass(User user, String newPass) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        newPass = bCryptPasswordEncoder.encode(newPass);
+        user.setPassword(newPass);
+        this.userRepository.saveAndFlush(user);
+    }
+
+    private void placeHoldersData(Model model, String email, String fullName, String pass) {
         model.addAttribute("email",email);
         model.addAttribute("fullName",fullName);
         model.addAttribute("pass",pass);
