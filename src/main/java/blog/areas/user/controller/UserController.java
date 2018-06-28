@@ -32,6 +32,32 @@ public class UserController {
         this.userService = userService;
     }
 
+
+    @GetMapping("/changePassword")
+    public String changePassword(Model model){
+        model.addAttribute("view","user/changePassword");
+        return "base-layout";
+    }
+
+    @PostMapping("/changePassword")
+    public String changePasswordProcess(Model model){
+        UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        UserViewModel user = this.userService.getUserView(principal.getUsername());
+
+
+
+
+        
+
+
+
+
+
+        model.addAttribute("view","user/changePassword");
+        return "base-layout";
+    }
+
     @GetMapping("/register")
     public String register(Model model){
         this.userService.placeHoldersData(model);
