@@ -1,5 +1,6 @@
 package blog.areas.user.services;
 
+import blog.areas.user.bindingModels.ChangePassBindingModel;
 import blog.areas.user.bindingModels.UserBindingModel;
 import blog.areas.user.entity.User;
 import blog.areas.user.viewModel.UserViewModel;
@@ -17,4 +18,5 @@ public interface UserServices {
     void registerUser(final UserBindingModel userBindingModel) throws IOException;
     boolean validateFormInput(final UserBindingModel userBindingModel, Model model);
     void placeHoldersData(Model model);
+    boolean isValidChangePassword(Model model, ChangePassBindingModel changePassBindingModel, User user);
 }

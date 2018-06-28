@@ -2,6 +2,7 @@ package blog.areas.user.services;
 
 import blog.areas.role.entity.Role;
 import blog.areas.role.repository.RoleRepository;
+import blog.areas.user.bindingModels.ChangePassBindingModel;
 import blog.areas.user.bindingModels.UserBindingModel;
 import blog.areas.user.entity.User;
 import blog.areas.user.repository.UserRepository;
@@ -96,6 +97,23 @@ public class UserServicesImpl implements UserServices {
         model.addAttribute("email","Email");
         model.addAttribute("fullName","Full Name");
         model.addAttribute("pass","Password");
+    }
+
+    @Override
+    public boolean isValidChangePassword(Model model, ChangePassBindingModel changePassBindingModel, User user) {
+        boolean isValid = true;
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String pass = changePassBindingModel.getCurrentPass();
+        //bCryptPasswordEncoder.encode(pass);
+        if (!user.getPassword().equals("currentPass")){
+            model.addAttribute("wrongPassword",true);
+            isValid = false;
+        }
+//        if (!changePassBindingModel.getNewPass().equals(changePassBindingModel.getConfirmPass())){
+//            model.addAttribute("inconsistentPasswords",true);
+//            isValid = false;
+//        }
+        return isValid;
     }
 
     public void placeHoldersData(Model model, String email, String fullName, String pass) {

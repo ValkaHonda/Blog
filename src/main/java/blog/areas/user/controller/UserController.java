@@ -1,5 +1,6 @@
 package blog.areas.user.controller;
 
+import blog.areas.user.bindingModels.ChangePassBindingModel;
 import blog.areas.user.bindingModels.UserBindingModel;
 import blog.areas.user.entity.User;
 import blog.areas.user.services.UserServices;
@@ -40,22 +41,22 @@ public class UserController {
     }
 
     @PostMapping("/changePassword")
-    public String changePasswordProcess(Model model){
+    public String changePasswordProcess(Model model, ChangePassBindingModel changePassBindingModel){
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        UserViewModel user = this.userService.getUserView(principal.getUsername());
-
-
-
-
-        
-
-
-
-
-
-        model.addAttribute("view","user/changePassword");
-        return "base-layout";
+        User user = this.userService.getUser(principal.getUsername());
+        if (changePassBindingModel == null){
+            for (int i = 0; i < 20; i++) {
+                System.out.println("null");
+            }
+        }
+        System.out.println("--->" + user.getPassword() + " :::: ");
+        if(!this.userService.isValidChangePassword(model,changePassBindingModel,user)){ // the service call!
+            model.addAttribute("view","user/changePassword");
+            return "base-layout";
+        }
+        System.out.println("OKKKKKKKKK Now --->" + user.getPassword() + " :::: ");
+        return "redirect:/login";
     }
 
     @GetMapping("/register")
