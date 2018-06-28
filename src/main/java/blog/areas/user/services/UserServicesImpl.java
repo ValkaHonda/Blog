@@ -124,6 +124,26 @@ public class UserServicesImpl implements UserServices {
         this.userRepository.saveAndFlush(user);
     }
 
+    @Override
+    public boolean emailExists(String email) {
+        return this.userRepository.findByEmail(email) != null;
+    }
+
+    @Override
+    public boolean resetPassword(String email) {
+        String newPass = this.passwordServices.generatePassword();
+        if (this.mailServices.sendEmailMessage(new EmailMessage(email,"New Pass","The new Pass is: "+newPass))){
+            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+            newPass = bCryptPasswordEncoder.encode(newPass);
+            User user = this.userRepository.findByEmail(email);
+            user.setPassword(newPass);
+            this.userRepository.saveAndFlush(user);
+            return true;
+        }
+
+        return false;
+    }
+
     private void placeHoldersData(Model model, String email, String fullName, String pass) {
         model.addAttribute("email",email);
         model.addAttribute("fullName",fullName);

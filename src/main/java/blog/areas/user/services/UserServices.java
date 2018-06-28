@@ -20,4 +20,6 @@ public interface UserServices {
     void placeHoldersData(Model model);
     boolean isValidChangePassword(Model model, ChangePassBindingModel changePassBindingModel, User user);
     void updateUserPass(User user, String newPass);
+    boolean emailExists(String email);
+    boolean resetPassword(String email);
 }

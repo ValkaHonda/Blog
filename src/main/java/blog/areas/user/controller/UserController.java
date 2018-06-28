@@ -33,7 +33,27 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/resetPassword")
+    public String resetPassword(Model model){
+        model.addAttribute("view","user/resetPass");
+        model.addAttribute("wrongEmail","Email");
+        return "base-layout";
+    }
 
+    @PostMapping("/resetPassword")
+    public String resetPasswordProcess(Model model, final UserBindingModel userBindingModel){
+        if(this.userService.emailExists(userBindingModel.getEmail())){
+            this.userService.resetPassword(userBindingModel.getEmail());
+            return "redirect:/login";
+        }
+        model.addAttribute("view","user/resetPass");
+        model.addAttribute("noSuchEmail",true);
+        model.addAttribute("wrongEmail",userBindingModel.getEmail());
+        return "base-layout";
+    }
+
+
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/changePassword")
     public String changePassword(Model model){
         model.addAttribute("view","user/changePassword");
