@@ -9,7 +9,6 @@ public class MailServicesImpl implements MailServices{
     private static final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
     private static final String USERNAME = "mailservices321@gmail.com";//
     private static final String PASSWORD = "blog123blog";
-
     @Override
     public boolean sendEmailMessage(EmailMessage emailMessage) {
         Properties props = System.getProperties();
@@ -38,12 +37,19 @@ public class MailServicesImpl implements MailServices{
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(emailMessage.getReceiver(),false));
             msg.setSubject(emailMessage.getSubject());
-           // msg.setText(emailMessage.getContent());
-            msg.setContent("<h1>Welcome, sir "+emailMessage.getSubject()+"<script>\n" +
-                    "</h1>" +
-                    "<button onclick=\"redirect()\">Confirm JS fix</button>"+
-                    "        <h2>Please press confirm if this is your email</h2>" +
-                    "        <a href=\"https://www.wikipedia.org/\">Confirm</a>", "text/html");
+
+
+
+
+
+            msg.setContent(emailMessage.getContent(), "text/html");
+
+
+
+
+
+
+
             msg.setSentDate(new Date());
             Transport.send(msg);
         }catch (MessagingException e){

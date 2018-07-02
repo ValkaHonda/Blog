@@ -60,15 +60,6 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public void registerUser(UserBindingModel userBindingModel) throws IOException {
-
-
-
-        String message = UserServicesImpl.newUserWelcomeText(userBindingModel.getFullName(), this.passwordServices.generatePassword());
-
-
-
-
-        this.mailServices.sendEmailMessage(new EmailMessage(userBindingModel.getEmail(),"Yo, welcome",message));
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         User user = new User(
                 userBindingModel.getEmail(),
@@ -80,6 +71,9 @@ public class UserServicesImpl implements UserServices {
         user.addRole(userRole);
         user.setPicture(picture);
         this.userRepository.saveAndFlush(user);
+        String message = UserServicesImpl.createConfirmationEmail(user);
+        System.out.println(message+"<<<<<<<<<<,,-------------------------------- HERE");
+        this.mailServices.sendEmailMessage(new EmailMessage(user.getEmail(),"Welcome ",message));
     }
 
     @Override
@@ -139,7 +133,7 @@ public class UserServicesImpl implements UserServices {
     @Override
     public boolean resetPassword(String email) {
         String newPass = this.passwordServices.generatePassword();
-        if (this.mailServices.sendEmailMessage(new EmailMessage(email,"New Pass","The new Pass is: "+newPass))){
+        if (this.mailServices.sendEmailMessage(new EmailMessage(email,"Reset password","New password" + newPass))){
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
             newPass = bCryptPasswordEncoder.encode(newPass);
             User user = this.userRepository.findByEmail(email);
@@ -147,7 +141,6 @@ public class UserServicesImpl implements UserServices {
             this.userRepository.saveAndFlush(user);
             return true;
         }
-
         return false;
     }
 
@@ -162,27 +155,37 @@ public class UserServicesImpl implements UserServices {
         this.userRepository.saveAndFlush(user);
     }
 
-    private void placeHoldersData(Model model, String email, String fullName, String pass) {
+    @Override
+    public boolean validateUser(String code) {
+        for (User user : this.userRepository.findAll()) {
+
+            System.out.println("===================================");
+            System.out.println(code);
+            String currentCode = user.getFullName();
+            System.out.println(currentCode);
+
+
+            if (currentCode.equals((code))){
+                user.setConfirm(true);
+                this.userRepository.saveAndFlush(user);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void placeHoldersData(Model model, String email, String fullName, String password) {
         model.addAttribute("email",email);
         model.addAttribute("fullName",fullName);
-        model.addAttribute("pass",pass);
+        model.addAttribute("pass",password);
     }
-    private static String newUserWelcomeText(String user, String pass){
-        return new StringBuilder("Wellcome, mr ")
-                .append(user)
-                .append("!")
-                .append(System.lineSeparator())
-                .append("You password is: ")
-                .append(pass)
-                .append(System.lineSeparator())
-                .append("Thank you for choosing us!").toString();
+    private static String createConfirmationEmail(User user){
+        return "        <h2>Please press confirm if this is your email</h2>" +
+                "        <a href=\"http://localhost:8080/validation/"+user.getFullName()+"\""+">Confirm</a>";
     }
-    private static String newUserWelcomeText(String user){
-        return "<h1>Hello</h1>";
-    }
+
     private boolean isEmailAddressFree(String email){
         User user = this.userRepository.findByEmail(email);
-        System.out.println("Email exits : " + (user == null));
         return user == null;
     }
 }

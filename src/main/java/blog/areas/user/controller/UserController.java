@@ -14,10 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -120,5 +117,17 @@ public class UserController {
         return "base-layout";
     }
 
+
+
+
+    @GetMapping("/validation/{code}")
+    public String edit(final @PathVariable String code, Model model) {
+        if (this.userService.validateUser(code)){
+            model.addAttribute("view","user/successfulValidation");
+        } else {
+            model.addAttribute("view", "user/unSuccessfulValidation");
+        }
+        return "base-layout";
+    }
 }
 

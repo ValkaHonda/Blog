@@ -23,4 +23,5 @@ public interface UserServices {
     boolean emailExists(String email);
     boolean resetPassword(String email);
     void changeActiveFlag(final Integer id);
+    boolean validateUser(String code);
 }
