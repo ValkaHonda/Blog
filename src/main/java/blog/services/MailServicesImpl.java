@@ -38,7 +38,14 @@ public class MailServicesImpl implements MailServices{
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(emailMessage.getReceiver(),false));
             msg.setSubject(emailMessage.getSubject());
-            msg.setText(emailMessage.getContent());
+           // msg.setText(emailMessage.getContent());
+            msg.setContent("<h1>Welcome, sir "+emailMessage.getSubject()+"<script>\n" +
+                    "function redirect(){\n"+
+                    "window.location.href = \"https://www.wikipedia.org/\";}\n"+
+                    "</script>"+"</h1>" +
+                    "<button onclick=\"redirect()\">Confirm JS fix</button>"+
+                    "        <h2>Please press confirm if this is your email</h2>" +
+                    "        <a href=\"https://www.wikipedia.org/\">Confirm</a>", "text/html");
             msg.setSentDate(new Date());
             Transport.send(msg);
         }catch (MessagingException e){

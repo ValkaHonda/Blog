@@ -61,8 +61,13 @@ public class UserServicesImpl implements UserServices {
     @Override
     public void registerUser(UserBindingModel userBindingModel) throws IOException {
 
+
+
         String message = UserServicesImpl.newUserWelcomeText(userBindingModel.getFullName(), this.passwordServices.generatePassword());
-        
+
+
+
+
         this.mailServices.sendEmailMessage(new EmailMessage(userBindingModel.getEmail(),"Yo, welcome",message));
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         User user = new User(
