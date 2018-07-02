@@ -4,6 +4,7 @@ import blog.areas.admin.services.AdminUserServices;
 import blog.areas.role.entity.Role;
 import blog.areas.user.bindingModels.UserEditBindingModel;
 import blog.areas.user.entity.User;
+import blog.areas.user.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +19,12 @@ import java.util.List;
 public class AdminUserController {
 
     private AdminUserServices adminUserServices;
+    private UserServices userServices;
 
     @Autowired
-    public AdminUserController(final AdminUserServices adminUserServices){
+    public AdminUserController(final AdminUserServices adminUserServices, final UserServices userServices){
         this.adminUserServices = adminUserServices;
+        this.userServices = userServices;
     }
 
     @GetMapping("/")
@@ -74,10 +77,13 @@ public class AdminUserController {
 
     @PostMapping("/delete/{id}")
     public String deleteProcess(final @PathVariable Integer id){
-        if (!this.adminUserServices.doesUserExists(id)){
+        User user = this.userServices.getUser(id);
+
+        if (user == null){
             return "redirect:/admin/users/";
         }
-        this.adminUserServices.deleteUser(id);
+
+        this.userServices.deactivateUser(id);
         return "redirect:/admin/users/";
     }
 }

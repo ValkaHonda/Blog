@@ -22,4 +22,5 @@ public interface UserServices {
     void updateUserPass(User user, String newPass);
     boolean emailExists(String email);
     boolean resetPassword(String email);
+    void deactivateUser(final Integer id);
 }

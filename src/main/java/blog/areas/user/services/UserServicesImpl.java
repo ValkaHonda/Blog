@@ -144,6 +144,13 @@ public class UserServicesImpl implements UserServices {
         return false;
     }
 
+    @Override
+    public void deactivateUser(Integer id) {
+        User user = this.getUser(id);
+        user.setActive(false);
+        this.userRepository.saveAndFlush(user);
+    }
+
     private void placeHoldersData(Model model, String email, String fullName, String pass) {
         model.addAttribute("email",email);
         model.addAttribute("fullName",fullName);
