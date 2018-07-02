@@ -82,8 +82,7 @@ public class AdminUserController {
         if (user == null){
             return "redirect:/admin/users/";
         }
-
-        this.userServices.deactivateUser(id);
+        this.userServices.changeActiveFlag(id);
         return "redirect:/admin/users/";
     }
 }

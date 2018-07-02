@@ -21,7 +21,14 @@
                             <td th:text="${user.email}"></td>
                             <td>
                                 <a th:href="@{/admin/users/edit/{id}(id=${user.id})}">Edit</a>
-                                <a th:href="@{/admin/users/delete/{id}(id=${user.id})}">Delete</a>
+                                <div th:switch="${user.getActive()}">
+                                    <p th:case="true">
+                                        <a th:href="@{/admin/users/delete/{id}(id=${user.id})}">Deactivate</a>
+                                    </p>
+                                    <p th:case="*">
+                                        <a th:href="@{/admin/users/delete/{id}(id=${user.id})}">Activate</a>
+                                    </p>
+                                </div>
                             </td>
                         </tr>
                     </th:block>

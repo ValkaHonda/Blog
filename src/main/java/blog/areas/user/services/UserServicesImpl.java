@@ -145,9 +145,13 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
-    public void deactivateUser(Integer id) {
+    public void changeActiveFlag(Integer id) {
         User user = this.getUser(id);
-        user.setActive(false);
+        if (user.getActive()){
+            user.setActive(false);
+        } else {
+            user.setActive(true);
+        }
         this.userRepository.saveAndFlush(user);
     }
 
