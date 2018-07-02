@@ -116,10 +116,7 @@ public class UserController {
 
         return "base-layout";
     }
-
-
-
-
+    
     @GetMapping("/validation/{code}")
     public String edit(final @PathVariable String code, Model model) {
         if (this.userService.validateUser(code)){
