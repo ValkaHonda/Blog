@@ -72,7 +72,6 @@ public class UserServicesImpl implements UserServices {
         user.setPicture(picture);
         this.userRepository.saveAndFlush(user);
         String message = UserServicesImpl.createConfirmationEmail(user);
-        System.out.println(message+"<<<<<<<<<<,,-------------------------------- HERE");
         this.mailServices.sendEmailMessage(new EmailMessage(user.getEmail(),"Welcome ",message));
     }
 
@@ -158,13 +157,7 @@ public class UserServicesImpl implements UserServices {
     @Override
     public boolean validateUser(String code) {
         for (User user : this.userRepository.findAll()) {
-
-            System.out.println("===================================");
-            System.out.println(code);
             String currentCode = user.getFullName();
-            System.out.println(currentCode);
-
-
             if (currentCode.equals((code))){
                 user.setConfirm(true);
                 this.userRepository.saveAndFlush(user);

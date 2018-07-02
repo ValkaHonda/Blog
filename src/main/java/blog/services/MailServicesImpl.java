@@ -21,6 +21,7 @@ public class MailServicesImpl implements MailServices{
         props.put("mail.debug", "true");
         props.put("mail.store.protocol", "pop3");
         props.put("mail.transport.protocol", "smtp");
+        System.out.println("***********************************************************************");
 
         try{
             Session session = Session.getDefaultInstance(props,
@@ -28,28 +29,16 @@ public class MailServicesImpl implements MailServices{
                         protected PasswordAuthentication getPasswordAuthentication() {
                             return new PasswordAuthentication(USERNAME, PASSWORD);
                         }});
-
+            System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
             // -- Create a new message --
             Message msg = new MimeMessage(session);
-
+            System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
             // -- Set the FROM and TO fields --
             msg.setFrom(new InternetAddress(USERNAME));
             msg.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(emailMessage.getReceiver(),false));
             msg.setSubject(emailMessage.getSubject());
-
-
-
-
-
             msg.setContent(emailMessage.getContent(), "text/html");
-
-
-
-
-
-
-
             msg.setSentDate(new Date());
             Transport.send(msg);
         }catch (MessagingException e){
