@@ -20,13 +20,13 @@
                             <td th:text="${user.fullName}"></td>
                             <td th:text="${user.email}"></td>
                             <td>
-                                <a th:href="@{/admin/users/edit/{id}(id=${user.id})}">Edit</a>
+                                <a th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="btn btn-info">Edit</a>
                                 <div th:switch="${user.getActive()}">
                                     <p th:case="true">
-                                        <a th:href="@{/admin/users/delete/{id}(id=${user.id})}">Deactivate</a>
+                                        <a th:href="@{/admin/users/delete/{id}(id=${user.id})}" class="btn btn-danger">Deactivate</a>
                                     </p>
                                     <p th:case="*">
-                                        <a th:href="@{/admin/users/delete/{id}(id=${user.id})}">Activate</a>
+                                        <a th:href="@{/admin/users/delete/{id}(id=${user.id})}" class="btn btn-success">Activate</a>
                                     </p>
                                 </div>
                             </td>

@@ -60,7 +60,9 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public void registerUser(UserBindingModel userBindingModel) throws IOException {
+
         String message = UserServicesImpl.newUserWelcomeText(userBindingModel.getFullName(), this.passwordServices.generatePassword());
+        
         this.mailServices.sendEmailMessage(new EmailMessage(userBindingModel.getEmail(),"Yo, welcome",message));
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         User user = new User(
@@ -169,6 +171,9 @@ public class UserServicesImpl implements UserServices {
                 .append(pass)
                 .append(System.lineSeparator())
                 .append("Thank you for choosing us!").toString();
+    }
+    private static String newUserWelcomeText(String user){
+        return "<h1>Hello</h1>";
     }
     private boolean isEmailAddressFree(String email){
         User user = this.userRepository.findByEmail(email);
