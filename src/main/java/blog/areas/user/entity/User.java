@@ -19,8 +19,11 @@ public class User {
     private Set<Role> roles;
     private Set<Article> articles;
     private byte[] picture;
+    private Boolean isActive;
+    private Boolean isConfirm;
 
     public User(String email, String fullName, String password) {
+        this();
         this.email = email;
         this.fullName = fullName;
         this.password = password;
@@ -28,7 +31,10 @@ public class User {
         this.articles = new HashSet<>();
     }
 
-    public User() { }
+    public User() {
+        this.isActive = true;
+        this.isConfirm = false;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,6 +104,24 @@ public class User {
     public void setPicture(byte[] picture) {
         this.picture = picture;
     }
+    @Column(name = "isActive")
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    @Column(name = "isConfirm")
+    public Boolean getConfirm() {
+        return isConfirm;
+    }
+
+    public void setConfirm(Boolean confirm) {
+        isConfirm = confirm;
+    }
+
 
     @Transient
     public boolean isAdmin(){
