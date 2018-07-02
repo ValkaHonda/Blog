@@ -11,7 +11,6 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User {
-
     private Integer id;
     private String email;
     private String fullName;
@@ -30,12 +29,10 @@ public class User {
         this.roles = new HashSet<>();
         this.articles = new HashSet<>();
     }
-
     public User() {
         this.isActive = true;
         this.isConfirm = false;
     }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
