@@ -1,6 +1,7 @@
 package blog.areas.user.services;
 
-import blog.areas.role.entity.Role;
+
+import blog.areas.role.entities.Role;
 import blog.areas.role.repository.RoleRepository;
 import blog.areas.user.bindingModels.ChangePassBindingModel;
 import blog.areas.user.bindingModels.UserBindingModel;
@@ -66,7 +67,11 @@ public class UserServicesImpl implements UserServices {
                 userBindingModel.getFullName(),
                 bCryptPasswordEncoder.encode(userBindingModel.getPassword())
         );
+
+
         Role userRole = this.roleRepository.findByName("ROLE_USER");
+
+
         byte[] picture = userBindingModel.getMultipartFile().getBytes();
         user.addRole(userRole);
         user.setPicture(picture);
@@ -138,6 +143,11 @@ public class UserServicesImpl implements UserServices {
             User user = this.userRepository.findByEmail(email);
             user.setPassword(newPass);
             this.userRepository.saveAndFlush(user);
+
+
+
+
+
             return true;
         }
         return false;

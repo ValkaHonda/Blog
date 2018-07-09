@@ -1,4 +1,4 @@
-package blog.areas.role.entity;
+package blog.areas.role.entities;
 
 import blog.areas.user.entity.User;
 import org.springframework.util.StringUtils;

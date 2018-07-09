@@ -15,7 +15,6 @@ public class Category {
     private Set<Article> articles;
 
     public Category(){ }
-
     public Category(String name){
         this.name = name;
         this.articles = new HashSet<>();

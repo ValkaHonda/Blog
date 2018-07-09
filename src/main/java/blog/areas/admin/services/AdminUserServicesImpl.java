@@ -2,7 +2,7 @@ package blog.areas.admin.services;
 
 import blog.areas.article.entities.Article;
 import blog.areas.article.repository.ArticleRepository;
-import blog.areas.role.entity.Role;
+import blog.areas.role.entities.Role;
 import blog.areas.role.repository.RoleRepository;
 import blog.areas.user.bindingModels.UserEditBindingModel;
 import blog.areas.user.entity.User;

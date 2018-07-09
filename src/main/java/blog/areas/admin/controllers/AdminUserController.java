@@ -1,7 +1,7 @@
 package blog.areas.admin.controllers;
 
 import blog.areas.admin.services.AdminUserServices;
-import blog.areas.role.entity.Role;
+import blog.areas.role.entities.Role;
 import blog.areas.user.bindingModels.UserEditBindingModel;
 import blog.areas.user.entity.User;
 import blog.areas.user.services.UserServices;

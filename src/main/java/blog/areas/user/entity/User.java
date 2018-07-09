@@ -1,7 +1,7 @@
 package blog.areas.user.entity;
 
 import blog.areas.article.entities.Article;
-import blog.areas.role.entity.Role;
+import blog.areas.role.entities.Role;
 
 import javax.persistence.*;
 import java.util.HashSet;
